@@ -1,0 +1,231 @@
+% !TeX program = xelatex
+% Compile with XeLaTeX (Overleaf: Menu -> Compiler -> XeLaTeX)
+
+\documentclass[10pt,a4paper]{ctexart}
+
+% ========== Packages ==========
+\usepackage[
+  left=15mm,
+  right=15mm,
+  top=9mm,
+  bottom=9mm
+]{geometry}
+\usepackage{tikz,xcolor,graphicx,array,tabularx,enumitem}
+
+% ========== Global Settings ==========
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.00}
+\setlength{\tabcolsep}{0pt}
+
+% ========== Colors ==========
+\definecolor{resbg}{HTML}{F7F8F8}
+\definecolor{resline}{HTML}{DADFE1}
+\definecolor{restext}{HTML}{222222}
+\definecolor{resarrow}{HTML}{FFFDF5}
+\definecolor{secinfo}{HTML}{DEA665}
+\definecolor{secedu}{HTML}{7FAFCB}
+\definecolor{secproj}{HTML}{4AAAC3}
+\definecolor{secwork}{HTML}{69B79C}
+\definecolor{secaward}{HTML}{9DBD64}
+\definecolor{secskill}{HTML}{B18FC5}
+
+% ========== Resume Title ==========
+\newcommand{\ResumeTitle}{%
+  \noindent{\bfseries\fontsize{12.5}{15}\selectfont 个人简历}
+  \par\vspace{1.7mm}
+}
+
+% ========== Section Banner ==========
+\newcommand{\ResumeBanner}[2]{%
+  \begin{tikzpicture}[baseline=(current bounding box.north)]
+    \fill[resbg,rounded corners=1.2mm] (0,0) rectangle (5.15,0.98);
+    \fill[#1,rounded corners=0.35mm] (0.07,0.04) rectangle (0.43,0.94);
+    \node[text=resarrow,font=\bfseries\fontsize{9}{10}\selectfont,inner sep=0pt]
+      at (0.25,0.49) {$>$};
+    \node[anchor=west,text=restext,font=\bfseries\fontsize{13}{15}\selectfont,inner sep=0pt]
+      at (0.72,0.49) {#2};
+    \draw[resline,line width=0.35pt] (0.48,0.04)--(5.08,0.04);
+  \end{tikzpicture}%
+}
+
+\newcommand{\ResumeSection}[2]{%
+  \par\vspace{1.0mm}
+  \noindent\ResumeBanner{#1}{#2}
+  \par\vspace{0.55mm}%
+}
+
+% ========== Photo ==========
+% Put your own photo in the project folder and name it photo.jpg.
+% If photo.jpg is missing, the template uses the included generic avatar.
+\newcommand{\ResumePhoto}{%
+  \IfFileExists{photo.jpg}{%
+    \includegraphics[width=26mm,height=34mm]{photo.jpg}%
+  }{%
+    \includegraphics[width=26mm,height=34mm]{generic-photo.png}%
+  }%
+}
+
+% ========== Basic Information ==========
+\newcommand{\ResumeBasicBlock}[2]{%
+  \noindent
+  \begin{minipage}[t]{0.79\linewidth}
+    \vspace{0pt}
+    \ResumeBanner{secinfo}{基本信息}
+    \par\vspace{2mm}
+    #1%
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.19\linewidth}
+    \vspace{0pt}
+    \raggedleft
+    #2%
+  \end{minipage}
+  \par
+}
+
+% ========== Education ==========
+% #1 Institution  #2 Major / degree / details  #3 Dates
+\newcommand{\Edu}[3]{%
+  \noindent
+  \begin{tabularx}{\linewidth}{@{}
+    >{\bfseries\raggedright\arraybackslash}p{0.19\linewidth}
+    >{\raggedright\arraybackslash}X
+    >{\bfseries\raggedleft\arraybackslash}p{0.22\linewidth}@{}}
+    #1 & \hspace{2mm}#2 & #3
+  \end{tabularx}%
+  \par\vspace{1.0mm}%
+}
+
+% ========== Project Experience ==========
+% #1 Dates  #2 Project name  #3 Description
+\newcommand{\Experience}[3]{%
+  \noindent
+  \begin{tabularx}{\linewidth}{@{}
+    >{\bfseries\raggedright\arraybackslash}p{0.29\linewidth}
+    >{\bfseries\raggedright\arraybackslash}X@{}}
+    #1 & #2
+  \end{tabularx}%
+  \par\vspace{0.15mm}
+  #3
+  \par\vspace{0.4mm}%
+}
+
+% ========== Work / Campus Experience ==========
+% #1 Dates  #2 Organization  #3 Position  #4 Description
+\newcommand{\WorkExperience}[4]{%
+  \noindent
+  \begin{tabularx}{\linewidth}{@{}
+    >{\bfseries\raggedright\arraybackslash}p{0.40\linewidth}
+    >{\bfseries\centering\arraybackslash}p{0.30\linewidth}
+    >{\bfseries\raggedleft\arraybackslash}X@{}}
+    #2 & #3 & #1
+  \end{tabularx}%
+  \par\vspace{0.2mm}
+  #4
+  \par\vspace{0.6mm}%
+}
+
+% ========== Description Line ==========
+\newcommand{\ResumeLine}[2]{%
+  \noindent\textbf{#1}：#2
+  \par\vspace{0.15mm}%
+}
+
+% ========== Lists ==========
+\setlist[enumerate]{leftmargin=4.5mm,itemsep=0pt,topsep=0pt,parsep=0pt}
+
+% ==========================================
+% Resume Content: replace bracketed placeholders with your information
+% ==========================================
+\begin{document}
+\ResumeTitle
+
+% 1. Basic Information
+\ResumeBasicBlock{%
+  姓\quad 名：[姓名]
+  \qquad
+  目标岗位：\textbf{[目标岗位]}
+
+  \par\vspace{2mm}
+
+  \resizebox{\linewidth}{!}{%
+    所在城市：[城市]
+    \enspace\textcolor{resline}{|}\enspace
+    邮箱：[邮箱]
+    \enspace\textcolor{resline}{|}\enspace
+    电话：[联系电话]%
+  }%
+}{%
+  \ResumePhoto
+}
+
+% 2. Education
+\ResumeSection{secedu}{教育背景}
+
+\Edu{[学校名称]}{[专业]\quad [学历/学位]\quad [补充信息]}{[起止年月]}
+\Edu{[学校名称]}{[专业]\quad [学历/学位]\quad [补充信息]}{[起止年月]}
+
+\ResumeLine{奖学金}{[奖学金或学业表现；没有可删除本行]}
+\ResumeLine{荣誉竞赛}{[相关荣誉、竞赛或证书；没有可删除本行]}
+
+% 3. Projects
+\ResumeSection{secproj}{项目经历}
+
+\Experience
+  {[起止年月]}
+  {[项目名称]}
+  {%
+    \ResumeLine{项目背景}{[用一句话说明项目目标、使用场景或需要解决的问题。]}
+    \ResumeLine{个人工作}{[说明自己负责的具体任务、使用的方法和工具。]}
+    \ResumeLine{项目成果}{[尽量使用可核实的结果、指标或交付物；没有量化数据时写清实际产出。]}
+  }
+
+\Experience
+  {[起止年月]}
+  {[项目名称]}
+  {%
+    \ResumeLine{项目工作}{[描述个人承担的工作、关键方法和最终成果。]}
+  }
+
+% 4. Internship and Work Experience
+\ResumeSection{secwork}{实习与工作经历}
+
+\WorkExperience
+  {[起止年月]}
+  {[公司/组织名称]}
+  {[岗位名称]}
+  {%
+    \ResumeLine{主要工作}{[描述日常职责、使用的工具以及协作对象。]}
+    \ResumeLine{工作成果}{[填写真实的工作结果、数量或效率改进；没有则删除本行。]}
+  }
+
+\WorkExperience
+  {[起止年月]}
+  {[公司/组织名称]}
+  {[岗位名称]}
+  {%
+    \ResumeLine{主要工作}{[用简洁的动词描述职责、行动和结果。]}
+  }
+
+% 5. Campus Experience (optional)
+\ResumeSection{secwork}{校园经历}
+
+\WorkExperience
+  {[起止年月]}
+  {[学生组织/社团名称]}
+  {[职务]}
+  {%
+    \ResumeLine{组织协作}{[描述活动策划、宣传、协调或其他实际工作。]}
+    \ResumeLine{工作成果}{[填写可核实的成果；没有则删除本行。]}
+  }
+
+% 6. Skills
+\ResumeSection{secskill}{技能特长}
+
+\ResumeLine{专业技能}{[编程语言、软件、分析工具或专业技术]}
+\ResumeLine{语言能力}{[语言等级及真实使用能力]}
+\ResumeLine{通用能力}{[沟通协作、写作、项目管理等与目标岗位相关的能力]}
+
+\end{document}

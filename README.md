@@ -1,57 +1,31 @@
-# 中文 LaTeX 简历模板
+# 中文 LaTeX 简历模板｜产品经理实习生示例
 
-一个简洁的中文 A4 简历模板，使用 XeLaTeX 编译，适合在 Overleaf 或本地 LaTeX 环境中修改。
+本仓库用于展示中文单页简历模板的排版与内容组织方式，采用 XeLaTeX 编译。
 
-## 特性
+**重要：** 本示例中的姓名、学校、公司、联系方式、奖学金、考试分数、项目和工作经历均为虚构内容，仅用于模板演示，不对应真实个人。请勿将虚构内容直接用于求职或其他需要真实履历的场景。
 
-- 中文排版，A4 页面
-- 基于 `ctexart`、`TikZ` 和 `tabularx`
-- 可复用的教育经历、项目经历、工作经历和技能模块
-- 自带通用头像占位图；也可以替换成自己的证件照
-- 不包含真实个人信息，适合作为模板二次编辑
+## 编译方式
 
-## 快速使用（推荐 Overleaf）
+1. 在 Overleaf 上传 `main.tex` 和 `generic-photo.png`。
+2. 将编译器设置为 **XeLaTeX**。
+3. 点击 Recompile。
+4. 根据实际情况替换示例内容。
 
-1. 在 GitHub 下载本项目 ZIP，或将仓库导入 Overleaf。
-2. 确认主文件为 `main.tex`。
-3. 在 Overleaf 的 **Menu → Compiler** 中选择 **XeLaTeX**。
-4. 点击 **Recompile**。
-5. 将 `main.tex` 中方括号里的提示文字替换为自己的内容。
+## 文件
 
-## 照片
+- `main.tex`：简历源码。
+- `generic-photo.png`：通用头像插画。
+- `preview.pdf`：编译效果预览。
+- `LICENSE`：MIT License。
+- `.gitignore`：LaTeX 辅助文件忽略规则。
 
-模板默认使用 `generic-photo.png`。如需使用自己的照片，将图片上传到项目根目录并命名为 `photo.jpg`，模板会优先读取 `photo.jpg`。
+## 版式特点
 
-公开仓库时请勿提交身份证件照、电话号码、个人邮箱、住址等隐私信息。
+- A4 单页布局
+- 中文排版与彩色分区标题
+- 教育、实习、项目、校园经历和技能模块
+- 通用头像，避免意外暴露个人照片
 
-## 本地编译
+## 许可证
 
-安装支持中文的 TeX 发行版后，在项目目录运行：
-
-```bash
-xelatex main.tex
-```
-
-需要安装的宏包通常包括 `ctex`、`geometry`、`tikz`、`xcolor`、`graphicx`、`array`、`tabularx` 和 `enumitem`。
-
-## 项目结构
-
-```text
-chinese-latex-resume-template/
-├── main.tex
-├── generic-photo.png
-├── README.md
-├── LICENSE
-└── .gitignore
-```
-
-## 自定义建议
-
-- 根据目标岗位调整模块顺序。
-- 优先写清个人行动、使用的方法和可核实的结果。
-- 删除不适用的模块，避免为了填满版面而保留空内容。
-- 编译后检查是否超出一页、是否出现过密换行或照片比例失真。
-
-## License
-
-本项目使用 MIT License。使用者可按许可证条款使用、修改和分发。
+MIT License。

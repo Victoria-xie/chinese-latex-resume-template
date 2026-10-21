@@ -1,25 +1,15 @@
 % !TeX program = xelatex
-% Compile with XeLaTeX (Overleaf: Menu -> Compiler -> XeLaTeX)
-
-\documentclass[10pt,a4paper]{ctexart}
-
-% ========== Packages ==========
-\usepackage[
-  left=15mm,
-  right=15mm,
-  top=9mm,
-  bottom=9mm
-]{geometry}
+% Overleaf Compiler: XeLaTeX
+% 注意：本模板中的姓名、学校、公司、经历、成绩和联系方式均为虚构示例，仅用于展示排版。
+\documentclass[9pt,a4paper]{ctexart}
+\usepackage[left=15mm,right=15mm,top=9mm,bottom=9mm]{geometry}
 \usepackage{tikz,xcolor,graphicx,array,tabularx,enumitem}
-
-% ========== Global Settings ==========
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\linespread{1.00}
+\linespread{1.025}
 \setlength{\tabcolsep}{0pt}
 
-% ========== Colors ==========
 \definecolor{resbg}{HTML}{F7F8F8}
 \definecolor{resline}{HTML}{DADFE1}
 \definecolor{restext}{HTML}{222222}
@@ -27,205 +17,87 @@
 \definecolor{secinfo}{HTML}{DEA665}
 \definecolor{secedu}{HTML}{7FAFCB}
 \definecolor{secproj}{HTML}{4AAAC3}
-\definecolor{secwork}{HTML}{69B79C}
+\definecolor{seccampus}{HTML}{69B79C}
 \definecolor{secaward}{HTML}{9DBD64}
-\definecolor{secskill}{HTML}{B18FC5}
+\definecolor{secself}{HTML}{B18FC5}
 
-% ========== Resume Title ==========
-\newcommand{\ResumeTitle}{%
-  \noindent{\bfseries\fontsize{12.5}{15}\selectfont 个人简历}
-  \par\vspace{1.7mm}
-}
-
-% ========== Section Banner ==========
+\newcommand{\ResumeTitle}{\noindent{\bfseries\fontsize{12.5}{15}\selectfont 个人简历}\par\vspace{1.7mm}}
 \newcommand{\ResumeBanner}[2]{%
   \begin{tikzpicture}[baseline=(current bounding box.north)]
     \fill[resbg,rounded corners=1.2mm] (0,0) rectangle (5.15,0.98);
     \fill[#1,rounded corners=0.35mm] (0.07,0.04) rectangle (0.43,0.94);
-    \node[text=resarrow,font=\bfseries\fontsize{9}{10}\selectfont,inner sep=0pt]
-      at (0.25,0.49) {$>$};
-    \node[anchor=west,text=restext,font=\bfseries\fontsize{13}{15}\selectfont,inner sep=0pt]
-      at (0.72,0.49) {#2};
+    \node[text=resarrow,font=\bfseries\fontsize{9}{10}\selectfont,inner sep=0pt] at (0.25,0.49) {\textgreater};
+    \node[anchor=west,text=restext,font=\bfseries\fontsize{13}{15}\selectfont,inner sep=0pt] at (0.72,0.49) {#2};
     \draw[resline,line width=0.35pt] (0.48,0.04)--(5.08,0.04);
   \end{tikzpicture}%
 }
-
-\newcommand{\ResumeSection}[2]{%
-  \par\vspace{1.0mm}
-  \noindent\ResumeBanner{#1}{#2}
-  \par\vspace{0.55mm}%
-}
-
-% ========== Photo ==========
-% Put your own photo in the project folder and name it photo.jpg.
-% If photo.jpg is missing, the template uses the included generic avatar.
-\newcommand{\ResumePhoto}{%
-  \IfFileExists{photo.jpg}{%
-    \includegraphics[width=26mm,height=34mm]{photo.jpg}%
-  }{%
-    \includegraphics[width=26mm,height=34mm]{generic-photo.png}%
-  }%
-}
-
-% ========== Basic Information ==========
+\newcommand{\ResumeSection}[2]{\par\vspace{1.7mm}\noindent\ResumeBanner{#1}{#2}\par\vspace{1.0mm}}
+% 使用通用插画头像，避免误放真实个人照片
+\newcommand{\ResumePhoto}{\includegraphics[width=26mm,height=34mm]{generic-photo.png}}
 \newcommand{\ResumeBasicBlock}[2]{%
-  \noindent
-  \begin{minipage}[t]{0.79\linewidth}
-    \vspace{0pt}
-    \ResumeBanner{secinfo}{基本信息}
-    \par\vspace{2mm}
-    #1%
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.19\linewidth}
-    \vspace{0pt}
-    \raggedleft
-    #2%
-  \end{minipage}
-  \par
+  \noindent\begin{minipage}[t]{0.79\linewidth}\vspace{0pt}\ResumeBanner{secinfo}{基本信息}\par\vspace{2mm}#1\end{minipage}\hfill%
+  \begin{minipage}[t]{0.19\linewidth}\vspace{0pt}\raggedleft #2\end{minipage}\par
 }
-
-% ========== Education ==========
-% #1 Institution  #2 Major / degree / details  #3 Dates
 \newcommand{\Edu}[3]{%
-  \noindent
-  \begin{tabularx}{\linewidth}{@{}
-    >{\bfseries\raggedright\arraybackslash}p{0.19\linewidth}
-    >{\raggedright\arraybackslash}X
-    >{\bfseries\raggedleft\arraybackslash}p{0.22\linewidth}@{}}
-    #1 & \hspace{2mm}#2 & #3
-  \end{tabularx}%
-  \par\vspace{1.0mm}%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}X>{\bfseries\raggedleft\arraybackslash}p{0.22\linewidth}@{}}
+  #1 & \hspace{2mm}#2 & #3
+  \end{tabularx}\par\vspace{1.0mm}%
 }
-
-% ========== Project Experience ==========
-% #1 Dates  #2 Project name  #3 Description
-\newcommand{\Experience}[3]{%
-  \noindent
-  \begin{tabularx}{\linewidth}{@{}
-    >{\bfseries\raggedright\arraybackslash}p{0.29\linewidth}
-    >{\bfseries\raggedright\arraybackslash}X@{}}
-    #1 & #2
-  \end{tabularx}%
-  \par\vspace{0.15mm}
-  #3
-  \par\vspace{0.4mm}%
-}
-
-% ========== Work / Campus Experience ==========
-% #1 Dates  #2 Organization  #3 Position  #4 Description
 \newcommand{\WorkExperience}[4]{%
-  \noindent
-  \begin{tabularx}{\linewidth}{@{}
-    >{\bfseries\raggedright\arraybackslash}p{0.40\linewidth}
-    >{\bfseries\centering\arraybackslash}p{0.30\linewidth}
-    >{\bfseries\raggedleft\arraybackslash}X@{}}
-    #2 & #3 & #1
-  \end{tabularx}%
-  \par\vspace{0.2mm}
-  #4
-  \par\vspace{0.6mm}%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.42\linewidth}>{\bfseries\centering\arraybackslash}p{0.28\linewidth}>{\bfseries\raggedleft\arraybackslash}X@{}}
+  #2 & #3 & #1
+  \end{tabularx}\par\vspace{0.45mm}#4\par\vspace{0.65mm}%
 }
+\newcommand{\ResumeLine}[2]{\noindent\textbf{#1}：#2\par\vspace{0.3mm}}
 
-% ========== Description Line ==========
-\newcommand{\ResumeLine}[2]{%
-  \noindent\textbf{#1}：#2
-  \par\vspace{0.15mm}%
-}
-
-% ========== Lists ==========
-\setlist[enumerate]{leftmargin=4.5mm,itemsep=0pt,topsep=0pt,parsep=0pt}
-
-% ==========================================
-% Resume Content: replace bracketed placeholders with your information
-% ==========================================
 \begin{document}
 \ResumeTitle
-
-% 1. Basic Information
 \ResumeBasicBlock{%
-  姓\quad 名：[姓名]
-  \qquad
-  目标岗位：\textbf{[目标岗位]}
+  姓\quad 名：林知夏\qquad 目标岗位：\textbf{产品经理实习生}\par\vspace{1.8mm}
+  出生年月：2002年06月\enspace\textcolor{resline}{|}\enspace 邮箱：lin.zhixia@example.com\par\vspace{1.8mm}
+  电话：13800000000\enspace\textcolor{resline}{|}\enspace 微信：linzhixia\_pm
+}{\ResumePhoto}
 
-  \par\vspace{2mm}
+\ResumeSection{secedu}{教育背景}
+\Edu{东川大学}{信息管理与信息系统\quad 硕士（GPA：3.78/4.00，专业前15\%）}{2024.09--2027.06}
+\Edu{江城理工大学}{信息管理与信息系统\quad 本科（GPA：3.62/4.00，专业前20\%）}{2020.09--2024.06}
+\ResumeLine{奖学金}{硕士学业二等奖学金（2024--2025）；硕士学业一等奖学金（2025--2026）；本科校级二等奖学金（2021--2022、2022--2023）。}
+\ResumeLine{荣誉竞赛}{校级优秀学生（2022）；“互联网+”校级创新创业大赛二等奖（2023）；优秀学生干部（2023）。}
+\ResumeLine{语言证书}{大学英语四级 CET-4（548分）；大学英语六级 CET-6（492分）；普通话二级甲等。}
 
-  \resizebox{\linewidth}{!}{%
-    所在城市：[城市]
-    \enspace\textcolor{resline}{|}\enspace
-    邮箱：[邮箱]
-    \enspace\textcolor{resline}{|}\enspace
-    电话：[联系电话]%
-  }%
-}{%
-  \ResumePhoto
+\ResumeSection{seccampus}{实习与工作经历}
+\WorkExperience{2026.03--2026.06}{星河科技有限公司}{产品经理实习生}{%
+  \ResumeLine{需求分析}{参与企业协作工具的用户访谈与竞品分析，整理12份访谈记录和6款竞品功能对比，归纳任务提醒、权限配置等高频需求。}
+  \ResumeLine{产品设计}{协助撰写产品需求文档（PRD），绘制核心流程图及低保真原型，跟进设计、研发和测试评审，推动3项功能进入迭代。}
+  \ResumeLine{数据复盘}{使用SQL和Excel跟踪功能使用率、任务完成率等指标，整理上线后数据周报，为后续交互优化提供依据。}
+}
+\vspace{1.2mm}
+\WorkExperience{2025.07--2025.09}{云帆网络科技有限公司}{产品运营实习生}{%
+  \ResumeLine{用户运营}{协助维护新用户引导与产品帮助中心，分析用户反馈并归纳高频问题，推动更新8篇帮助文档。}
+  \ResumeLine{活动复盘}{跟踪线上专题活动的曝光、点击和转化数据，使用Excel制作周报与活动复盘表，提出页面文案和入口位置优化建议。}
 }
 
-% 2. Education
-\ResumeSection{secedu}{教育背景}
-
-\Edu{[学校名称]}{[专业]\quad [学历/学位]\quad [补充信息]}{[起止年月]}
-\Edu{[学校名称]}{[专业]\quad [学历/学位]\quad [补充信息]}{[起止年月]}
-
-\ResumeLine{奖学金}{[奖学金或学业表现；没有可删除本行]}
-\ResumeLine{荣誉竞赛}{[相关荣誉、竞赛或证书；没有可删除本行]}
-
-% 3. Projects
 \ResumeSection{secproj}{项目经历}
+\WorkExperience{2025.10--2026.01}{校园二手交易平台改版项目}{产品负责人（课程项目）}{%
+  \ResumeLine{用户研究}{面向在校学生开展问卷调研并访谈15名潜在用户，识别商品发布流程复杂、交易信任不足等主要问题。}
+  \ResumeLine{方案设计}{使用Figma绘制商品发布、搜索筛选和信用评价原型，编写需求文档并拆分功能优先级，组织4人小组完成可交互原型。}
+  \ResumeLine{项目结果}{通过5名用户进行可用性测试，依据任务完成情况优化关键页面流程，形成需求文档、原型及测试报告。}
+}
+\vspace{1.0mm}
+\WorkExperience{2025.03--2025.06}{校园活动报名小程序}{产品策划（课程项目）}{%
+  \ResumeLine{功能规划}{梳理活动发布、报名审核、消息通知和签到流程，绘制用户流程图及页面原型，完成项目汇报与演示。}
+}
 
-\Experience
-  {[起止年月]}
-  {[项目名称]}
-  {%
-    \ResumeLine{项目背景}{[用一句话说明项目目标、使用场景或需要解决的问题。]}
-    \ResumeLine{个人工作}{[说明自己负责的具体任务、使用的方法和工具。]}
-    \ResumeLine{项目成果}{[尽量使用可核实的结果、指标或交付物；没有量化数据时写清实际产出。]}
-  }
+\ResumeSection{seccampus}{校园经历}
+\WorkExperience{2023.09--2024.06}{江城理工大学学生会}{宣传部副部长}{%
+  \ResumeLine{活动组织}{协助策划迎新季及校园文化节宣传工作，协调6名部门成员完成活动海报、推文和现场素材整理。}
+  \ResumeLine{内容运营}{参与运营学院微信公众号，规划选题、撰写推文并跟踪阅读数据；学年内参与发布推文18篇，单篇最高阅读量约1,200次。}
+}
 
-\Experience
-  {[起止年月]}
-  {[项目名称]}
-  {%
-    \ResumeLine{项目工作}{[描述个人承担的工作、关键方法和最终成果。]}
-  }
-
-% 4. Internship and Work Experience
-\ResumeSection{secwork}{实习与工作经历}
-
-\WorkExperience
-  {[起止年月]}
-  {[公司/组织名称]}
-  {[岗位名称]}
-  {%
-    \ResumeLine{主要工作}{[描述日常职责、使用的工具以及协作对象。]}
-    \ResumeLine{工作成果}{[填写真实的工作结果、数量或效率改进；没有则删除本行。]}
-  }
-
-\WorkExperience
-  {[起止年月]}
-  {[公司/组织名称]}
-  {[岗位名称]}
-  {%
-    \ResumeLine{主要工作}{[用简洁的动词描述职责、行动和结果。]}
-  }
-
-% 5. Campus Experience (optional)
-\ResumeSection{secwork}{校园经历}
-
-\WorkExperience
-  {[起止年月]}
-  {[学生组织/社团名称]}
-  {[职务]}
-  {%
-    \ResumeLine{组织协作}{[描述活动策划、宣传、协调或其他实际工作。]}
-    \ResumeLine{工作成果}{[填写可核实的成果；没有则删除本行。]}
-  }
-
-% 6. Skills
-\ResumeSection{secskill}{技能特长}
-
-\ResumeLine{专业技能}{[编程语言、软件、分析工具或专业技术]}
-\ResumeLine{语言能力}{[语言等级及真实使用能力]}
-\ResumeLine{通用能力}{[沟通协作、写作、项目管理等与目标岗位相关的能力]}
+\ResumeSection{secself}{技能特长}
+\ResumeLine{产品工具}{熟悉Axure、Figma进行原型设计，能够使用XMind梳理需求与业务流程，了解PRD撰写和需求优先级管理。}
+\ResumeLine{数据分析}{掌握Excel函数、数据透视表和图表制作，了解SQL基础查询，能够进行基础指标统计与活动复盘。}
+\ResumeLine{办公与语言}{熟练使用PowerPoint、Word；CET-4、CET-6，具备英文资料阅读与基础书面沟通能力。}
+\ResumeLine{综合能力}{具备用户视角、逻辑分析、跨团队沟通和项目协作意识，能够使用ChatGPT等AI工具辅助资料整理与方案梳理。}
 
 \end{document}

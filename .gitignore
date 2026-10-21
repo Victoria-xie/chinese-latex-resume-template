@@ -1,4 +1,3 @@
-# LaTeX auxiliary files
 *.aux
 *.log
 *.out
@@ -9,9 +8,3 @@
 *.xdv
 *.bbl
 *.blg
-
-# Generated PDFs (uncomment if you want to version-control the compiled PDF)
-# *.pdf
-
-# Private photo; do not commit your personal photo by accident
-photo.jpg
